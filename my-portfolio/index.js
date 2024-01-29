@@ -1,6 +1,19 @@
 import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
+import * as dat from 'dat.gui';
+console.log(dat);
 
 
+const gui = new dat.GUI();
+const world = {
+   plane:{
+    width:10,
+
+   }
+}
+gui.add(world.plane,'width', 1,500).onChange ( () => {
+    planeMesh.geometry.dispose();
+    planeMesh.geometry = new THREE.PlaneGeometry(world.plane.width,10,10,10);
+})
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); //4 arguments [field of view in degrees,aspect ratio of the scene,clipping planes (how close the object is to the camera before its clipped),far clippping planes]
 
@@ -14,7 +27,7 @@ document.body.appendChild(renderer.domElement);
 
 camera.position.z= 5;
 
-const planeGeometry = new THREE.PlaneGeometry(5,5,10,10);
+const planeGeometry = new THREE.PlaneGeometry(10,10,10,10);
 const planeMaterial = new THREE.MeshPhongMaterial({color:0xff0000,
  side: THREE.DoubleSide,
 flatShading: THREE.FlatShading
@@ -37,7 +50,7 @@ scene.add(light);
 function animate(){
     requestAnimationFrame(animate)
     renderer.render(scene,camera);
-    planeMesh.rotation.x += 0.01;
+    // planeMesh.rotation.x += 0.01;
     
 }
 
