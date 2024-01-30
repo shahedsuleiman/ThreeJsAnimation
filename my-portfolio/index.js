@@ -1,5 +1,6 @@
 import * as THREE from "https://unpkg.com/three@0.126.1/build/three.module.js";
 import * as dat from "dat.gui";
+import {OrbitControls} from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls';
 console.log(dat);
 
 const gui = new dat.GUI();
@@ -41,6 +42,7 @@ function generatePlane() {
   }
 }
 
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -56,6 +58,8 @@ renderer.setPixelRatio(devicePixelRatio);
 document.body.appendChild(renderer.domElement);
 //boxgeometry[width,length,height]
 
+//add orbits controls
+new OrbitControls(camera, renderer.domElement);
 camera.position.z = 5;
 
 const planeGeometry = new THREE.PlaneGeometry(10, 10, 10, 10);
@@ -77,6 +81,11 @@ for (let i = 0; i < array.length; i += 3) {
 const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(0, 0, 1);
 scene.add(light);
+
+const backLight = new THREE.DirectionalLight(0xffffff, 1);
+backLight.position.set(0, 0, -1);
+scene.add(backLight);
+
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
