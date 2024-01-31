@@ -1,3 +1,5 @@
+//boxgeometry[width,length,height]
+
 import * as THREE from "https://unpkg.com/three@0.126.1/build/three.module.js";
 import * as dat from "dat.gui";
 import {OrbitControls} from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls';
@@ -12,6 +14,7 @@ const world = {
     heightSegments:10,
   },
 };
+
 gui.add(world.plane, "width", 1, 20)
 .onChange(generatePlane);
 
@@ -32,6 +35,7 @@ function generatePlane() {
   world.plane.height, 
   world.plane.widthSegments, 
   world.plane.heightSegments);
+
   const { array } = planeMesh.geometry.attributes.position;
   for (let i = 0; i < array.length; i += 3) {
     const x = array[i];
@@ -56,20 +60,26 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(innerWidth, innerHeight);
 renderer.setPixelRatio(devicePixelRatio);
 document.body.appendChild(renderer.domElement);
-//boxgeometry[width,length,height]
+
 
 //add orbits controls
 new OrbitControls(camera, renderer.domElement);
-camera.position.z = 5;
+camera.position.z = 10;
 
 const planeGeometry = new THREE.PlaneGeometry(10, 10, 10, 10);
 const planeMaterial = new THREE.MeshPhongMaterial({
-  color: 0x4682B4,
+  color: 0xFF69B4,
   side: THREE.DoubleSide,
   flatShading: THREE.FlatShading,
+  transparent: true,
+  opacity: 0.5,
 });
+
+
 const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
 scene.add(planeMesh);
+
+
 const { array } = planeMesh.geometry.attributes.position;
 for (let i = 0; i < array.length; i += 3) {
   const x = array[i];
@@ -78,6 +88,8 @@ for (let i = 0; i < array.length; i += 3) {
 
   array[i + 2] = z + Math.random();
 }
+
+
 const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(0, 0, 1);
 scene.add(light);
@@ -96,17 +108,17 @@ function animate() {
   renderer.render(scene, camera);
 
   raycaster.setFromCamera(mouse, camera);
- const intersects = raycaster.intersectObject(planeMesh);
- if (intersects.length > 0) {
-  
- }
+  const intersects = raycaster.intersectObject(planeMesh);
+  if (intersects.length > 0) {
+    console.log("intersecting")
+  }
   // planeMesh.rotation.x += 0.01;
 }
 
 animate();
 
 
-addEventListener('mousemove', () => {
+addEventListener('mousemove', (event) => {
     mouse.x = (event.clientX/ innerWidth) *2 -1;
     mouse.y = -(event.clientY/ innerWidth) *2 +1
 
