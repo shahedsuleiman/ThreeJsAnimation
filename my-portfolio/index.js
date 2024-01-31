@@ -1,7 +1,7 @@
 import * as THREE from "https://unpkg.com/three@0.126.1/build/three.module.js";
 import * as dat from "dat.gui";
 import {OrbitControls} from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls';
-console.log(dat);
+
 
 const gui = new dat.GUI();
 const world = {
@@ -42,7 +42,7 @@ function generatePlane() {
   }
 }
 
-
+const raycaster = new THREE.Raycaster();
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -64,7 +64,7 @@ camera.position.z = 5;
 
 const planeGeometry = new THREE.PlaneGeometry(10, 10, 10, 10);
 const planeMaterial = new THREE.MeshPhongMaterial({
-  color: 0xff0000,
+  color: 0x4682B4,
   side: THREE.DoubleSide,
   flatShading: THREE.FlatShading,
 });
@@ -86,10 +86,29 @@ const backLight = new THREE.DirectionalLight(0xffffff, 1);
 backLight.position.set(0, 0, -1);
 scene.add(backLight);
 
+const mouse = {
+  x: undefined,
+  y: undefined,
+}
+
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
+
+  raycaster.setFromCamera(mouse, camera);
+ const intersects = raycaster.intersectObject(planeMesh);
+ if (intersects.length > 0) {
+  
+ }
   // planeMesh.rotation.x += 0.01;
 }
 
 animate();
+
+
+addEventListener('mousemove', () => {
+    mouse.x = (event.clientX/ innerWidth) *2 -1;
+    mouse.y = -(event.clientY/ innerWidth) *2 +1
+
+    
+})
