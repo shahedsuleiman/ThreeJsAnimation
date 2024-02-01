@@ -39,6 +39,15 @@ function generatePlane() {
 
     array[i + 2] = z + Math.random();
   }
+  const colors = [];
+  for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
+    colors.push(0, 0.19, 0.4);
+  }
+  console.log(colors);
+  planeMesh.geometry.setAttribute(
+    "color",
+    new THREE.BufferAttribute(new Float32Array(colors), 3)
+  );
 }
 
 const raycaster = new THREE.Raycaster();
