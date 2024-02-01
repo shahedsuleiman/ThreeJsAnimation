@@ -7,16 +7,16 @@ import { OrbitControls } from "https://unpkg.com/three@0.126.1/examples/jsm/cont
 const gui = new dat.GUI();
 const world = {
   plane: {
-    width: 10,
-    height: 10,
-    widthSegments: 10,
-    heightSegments: 10,
+    width: 19,
+    height: 19,
+    widthSegments: 17,
+    heightSegments: 17,
   },
 };
 
-gui.add(world.plane, "width", 1, 20).onChange(generatePlane);
+gui.add(world.plane, "width", 1, 50).onChange(generatePlane);
 
-gui.add(world.plane, "height", 1, 20).onChange(generatePlane);
+gui.add(world.plane, "height", 1, 50).onChange(generatePlane);
 
 gui.add(world.plane, "widthSegments", 1, 50).onChange(generatePlane);
 
@@ -69,7 +69,7 @@ document.body.appendChild(renderer.domElement);
 new OrbitControls(camera, renderer.domElement);
 camera.position.z = 10;
 
-const planeGeometry = new THREE.PlaneGeometry(10, 10, 10, 10);
+const planeGeometry = new THREE.PlaneGeometry(19, 19, 17, 17);
 const planeMaterial = new THREE.MeshPhongMaterial({
   // color: 0xFF69B4,
   side: THREE.DoubleSide,
