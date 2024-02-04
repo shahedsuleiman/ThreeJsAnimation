@@ -122,7 +122,7 @@ function animate() {
 
   for (let i = 0; i < array.length; i += 3) {
     array[i] = originalPosition[i] + Math.cos(frame + randomValues[i]) * 0.01;
-    array[i+1] = originalPosition[i+1] + Math.sin(frame + randomValues[i+1]) * 0.01;
+    array[i + 1] = originalPosition[i+1] + Math.sin(frame + randomValues[i+1]) * 0.01;
   }
 
   planeMesh.geometry.attributes.position.needsUpdate = true;
@@ -185,3 +185,16 @@ addEventListener("mousemove", (event) => {
   mouse.x = (event.clientX / innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / innerWidth) * 2 + 1;
 });
+
+window.addEventListener('resize', () => {
+  // update display width and height
+  width = window.innerWidth
+  height = window.innerHeight
+  // update camera aspect
+  camera.aspect = width / height
+  camera.updateProjectionMatrix()
+  // update renderer
+  renderer.setSize(width, height)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  renderer.render(scene, camera)
+})
