@@ -4,13 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="http://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;1,400&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;1,400&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         body {
             margin:0;
         }
+        .font-exo {
+            font-family: 'Exo 2', sans-serif;
+        }
+        .font-mono {
+            font-family: 'Space Mono', monospace;
+        }
     </style>
 </head>
 <body>
+    <div id="body">
+        <div class="absolute text-white text-center lg:w-[40rem] md:w-[20rem] sm:w-[10rem]" 
+        style="top:50% ; transform: translate(-50%, -50%) ; left:50%">
+            <h1 class="font-mono text-4xl mb-5">Shahed Suleiman</h1>
+            <p class="font-exo text-5xl mb-8">ONE WITH AN EVERLASTING DESIRE FOR THE UNKNOWN & UNTOLD</p>
+            <button class="border border-white p-3 rounded-md hover:bg-white hover:text-black w-[10rem]">View Work</button>
+        </div>
+        </div>
+    </div>
     <script type="module" src="./index.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
