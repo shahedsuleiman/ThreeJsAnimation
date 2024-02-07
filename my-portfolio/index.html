@@ -14,6 +14,7 @@
     <style>
         body {
             margin:0;
+            
         }
         .font-exo {
             font-family: 'Exo 2', sans-serif;
@@ -21,23 +22,28 @@
         .font-mono {
             font-family: 'Space Mono', monospace;
         }
+        .section {
+            text-align: center;
+            margin-top: 20px;
+        }
     
     </style>
 </head>
 <body>
     <div id="body">
-        <div class="absolute text-white text-center lg:w-[37.5rem] md:w-[20rem] sm:w-[10rem]" 
+        <div class="absolute text-white text-center lg:w-[50rem] md:w-[20rem] sm:w-[10rem]" 
         style="top:50% ; transform: translate(-50%, -50%) ; left:50%">
             <h1 class="font-mono text-4xl mb-5">Shahed Suleiman</h1>
             <p class="font-exo text-5xl mb-8">ONE WITH AN EVERLASTING DESIRE FOR THE UNKNOWN & UNTOLD</p>
-            <button class="border border-white p-3 rounded-md hover:bg-white hover:text-black w-[10rem]">View Work</button>
+            <button id="button" class="border border-white p-3 rounded-lg uppercase hover:bg-white hover:text-black w-[8rem] font-mono">View Work</button>        
+            <script type="module" src="./index.js"></script>
+
         </div>
-        </div>
-        <script type="module" src="./index.js"></script>
+        
     </div>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
    
 
 </body>

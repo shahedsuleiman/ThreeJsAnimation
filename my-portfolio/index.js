@@ -2,6 +2,8 @@ import gsap from "gsap";
 import * as THREE from "https://unpkg.com/three@0.126.1/build/three.module.js";
 import * as dat from "dat.gui";
 import { OrbitControls } from "https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls";
+import TWEEN from '@tweenjs/tween.js';
+// import { TWEEN } from 'https://unpkg.com/three@0.139.0/examples/jsm/libs/tween.module.min.js';
 
 const gui = new dat.GUI();
 const world = {
@@ -111,10 +113,16 @@ const mouse = {
   y: undefined,
 };
 
+
+
+
 let frame = 0;
 function animate() {
   requestAnimationFrame(animate);
+
   renderer.render(scene, camera);
+  TWEEN.update();
+
   raycaster.setFromCamera(mouse, camera);
   frame += 0.01;
   const { array, originalPosition, randomValues } =
@@ -179,7 +187,46 @@ function animate() {
   }
 }
 
+
 animate();
+
+var btn = document.getElementById("button");
+btn.onclick = function(){
+//   const { array } =
+//   planeMesh.geometry.attributes.position;
+
+// for (let i = 0; i < array.length; i += 3) {
+//   planeMesh.rotation.x = 0.1;
+// }
+// Tween.js Tweening
+new TWEEN.Tween(planeMesh.position)
+  .to( { y:1.5 }, 2000)
+  .yoyo(true)
+  .repeat(Infinity)
+  .easing(TWEEN.Easing.Cubic.InOut)
+  .start()
+;
+new TWEEN.Tween(planeMesh.rotation)
+  .to({ y: "-" + (Math.PI/2) * 8}, 6000) // Math.PI/2 = 360degrees x8 rotations
+  .delay(1000)
+  .repeat(Infinity)
+  .easing(TWEEN.Easing.Cubic.InOut)
+  .start()
+;
+new TWEEN.Tween(planeMesh.rotation)
+  .to({ x: "-" + (Math.PI/2) * 9}, 14000)
+  .repeat(Infinity)
+  .easing(TWEEN.Easing.Cubic.InOut)
+  .start()
+;
+new TWEEN.Tween(planeMesh.scale)
+  .to( { x:1.25, y:1.25, z:1.25 }, 5000)
+  .yoyo(true)
+  .repeat(Infinity)
+  .easing(TWEEN.Easing.Cubic.InOut)
+  .start()
+;
+}
 
 addEventListener("mousemove", (event) => {
   mouse.x = (event.clientX / innerWidth) * 2 - 1;
